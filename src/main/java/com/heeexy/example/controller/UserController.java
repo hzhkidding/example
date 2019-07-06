@@ -13,7 +13,6 @@ import javax.servlet.http.HttpServletRequest;
 /**
  * @author: hxy
  * @description: 用户/角色/权限相关controller
- * @date: 2017/11/2 10:19
  */
 @RestController
 @RequestMapping("/user")
@@ -25,14 +24,14 @@ public class UserController {
 	 * 查询用户列表
 	 */
 	@RequiresPermissions("user:list")
-	@GetMapping("/list")
+	@GetMapping("/users")
 	public JSONObject listUser(HttpServletRequest request) {
 		System.out.println("userlist");
 		return userService.listUser(CommonUtil.request2Json(request));
 	}
 
 	@RequiresPermissions("user:add")
-	@PostMapping("/addUser")
+	@PostMapping("/user")
 	public JSONObject addUser(@RequestBody JSONObject requestJson) {
 		System.out.println("useradd");
 		CommonUtil.hasAllRequired(requestJson, "username, password, nickname,   roleId");
@@ -40,7 +39,7 @@ public class UserController {
 	}
 
 	@RequiresPermissions("user:update")
-	@PostMapping("/updateUser")
+	@PutMapping("/user")
 	public JSONObject updateUser(@RequestBody JSONObject requestJson) {
 		System.out.println("userupdate");
 		CommonUtil.hasAllRequired(requestJson, " nickname,   roleId, deleteStatus, userId");
@@ -48,7 +47,7 @@ public class UserController {
 	}
 
 	@RequiresPermissions(value = {"user:add", "user:update"}, logical = Logical.OR)
-	@GetMapping("/getAllRoles")
+	@GetMapping("/roles")
 	public JSONObject getAllRoles() {
 
 		System.out.println("user:add,user:update");
@@ -59,7 +58,7 @@ public class UserController {
 	 * 角色列表
 	 */
 	@RequiresPermissions("role:list")
-	@GetMapping("/listRole")
+	@GetMapping("/roleList")
 	public JSONObject listRole() {
 
 		System.out.println("rolelist");
@@ -70,7 +69,7 @@ public class UserController {
 	 * 查询所有权限, 给角色分配权限时调用
 	 */
 	@RequiresPermissions("role:list")
-	@GetMapping("/listAllPermission")
+	@GetMapping("/permissonList")
 	public JSONObject listAllPermission() {
 
 		System.out.println("listPermission");return userService.listAllPermission();
@@ -79,37 +78,8 @@ public class UserController {
 	/**
 	 * 新增角色
 	 */
-/*	@RequiresPermissions("role:add")
-	@PostMapping("/addRole")
-	public JSONObject addRole(@RequestBody JSONObject requestJson) {
-		CommonUtil.hasAllRequired(requestJson, "roleName,permissions");
-		return userService.addRole(requestJson);
-	}
-
-	*//**
-	 * 修改角色
-	 *//*
-	@RequiresPermissions("role:update")
-	@PostMapping("/updateRole")
-	public JSONObject updateRole(@RequestBody JSONObject requestJson) {
-		CommonUtil.hasAllRequired(requestJson, "roleId,roleName,permissions");
-		return userService.updateRole(requestJson);
-	}
-
-	*//**
-	 * 删除角色
-	 *//*
-	@RequiresPermissions("role:delete")
-	@PostMapping("/deleteRole")
-	public JSONObject deleteRole(@RequestBody JSONObject requestJson) {
-		CommonUtil.hasAllRequired(requestJson, "roleId");
-		return userService.deleteRole(requestJson);
-	}*/
-	/**
-	 * 新增角色
-	 */
 	@RequiresPermissions("role:add")
-	@PostMapping("/Role")
+	@PostMapping("/role")
 	public JSONObject addRole(@RequestBody JSONObject requestJson) {
 		CommonUtil.hasAllRequired(requestJson, "roleName,permissions");
 		return userService.addRole(requestJson);
@@ -119,7 +89,7 @@ public class UserController {
 	 * 修改角色
 	 */
 	@RequiresPermissions("role:update")
-	@PutMapping("/Role")
+	@PutMapping("/role")
 	public JSONObject updateRole(@RequestBody JSONObject requestJson) {
 		CommonUtil.hasAllRequired(requestJson, "roleId,roleName,permissions");
 		return userService.updateRole(requestJson);
@@ -129,9 +99,10 @@ public class UserController {
 	 * 删除角色
 	 */
 	@RequiresPermissions("role:delete")
-	@DeleteMapping("/Role")
+	@DeleteMapping("/role")
 	public JSONObject deleteRole(@RequestBody JSONObject requestJson) {
 		CommonUtil.hasAllRequired(requestJson, "roleId");
 		return userService.deleteRole(requestJson);
 	}
+
 }

@@ -5,23 +5,22 @@ import com.heeexy.example.service.LoginService;
 import com.heeexy.example.util.CommonUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 
 @RestController
 @RequestMapping("/login")
-@Slf4j
+
 public class LoginController {
 
 	@Autowired
 	private LoginService loginService;
 
+
 	/**
 	 * 登录
 	 */
+
 	@PostMapping("/auth")
 	public JSONObject authLogin(@RequestBody JSONObject requestJson) {
 		System.out.println("auth");
@@ -33,11 +32,11 @@ public class LoginController {
 	/**
 	 * 查询当前登录用户的信息
 	 */
-	@PostMapping("/getInfo")
+	@GetMapping("/user")
 
 	public JSONObject getInfo() {
 
-		System.out.println("getinfo");
+
 		return loginService.getInfo();
 	}
 

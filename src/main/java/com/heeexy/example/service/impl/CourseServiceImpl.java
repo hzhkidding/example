@@ -2,7 +2,7 @@ package com.heeexy.example.service.impl;
 
 import com.alibaba.fastjson.JSONObject;
 import com.heeexy.example.dao.ArticleDao;
-import com.heeexy.example.service.ArticleService;
+import com.heeexy.example.service.CourseService;
 import com.heeexy.example.util.CommonUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,7 +14,7 @@ import java.util.List;
  * @author: hxy
  */
 @Service
-public class ArticleServiceImpl implements ArticleService {
+public class CourseServiceImpl implements CourseService {
 
 	@Autowired
 	private ArticleDao articleDao;

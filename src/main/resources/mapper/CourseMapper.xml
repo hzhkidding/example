@@ -3,20 +3,20 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.heeexy.example.dao.ArticleDao">
 
-    <insert id="addArticle" parameterType="com.alibaba.fastjson.JSONObject">
+    <insert id="addCourse" parameterType="com.alibaba.fastjson.JSONObject">
         INSERT INTO article
             (content)
         VALUES
             (#{content})
     </insert>
 
-    <select id="countArticle" resultType="Integer">
+    <select id="countCourse" resultType="Integer">
         SELECT count(0)
         FROM article w
         WHERE w.delete_status = '1'
     </select>
 
-    <select id="listArticle" resultType="com.alibaba.fastjson.JSONObject">
+    <select id="listCourse" resultType="com.alibaba.fastjson.JSONObject">
         SELECT
             w.id                                      id,
             w.content                                 content,
@@ -27,7 +27,7 @@
         LIMIT #{offSet}, #{pageRow}
     </select>
 
-    <update id="updateArticle" parameterType="com.alibaba.fastjson.JSONObject">
+    <update id="updateCourse" parameterType="com.alibaba.fastjson.JSONObject">
         UPDATE article
         SET
             content = #{content}

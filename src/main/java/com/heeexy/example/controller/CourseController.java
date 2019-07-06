@@ -1,9 +1,9 @@
 package com.heeexy.example.controller;
 
 import com.alibaba.fastjson.JSONObject;
-import com.heeexy.example.service.ArticleService;
+import com.heeexy.example.service.CourseService;
 import com.heeexy.example.util.CommonUtil;
-import lombok.extern.slf4j.Slf4j;
+
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -15,29 +15,31 @@ import javax.servlet.http.HttpServletRequest;
 
 @RestController
 @RequestMapping("/article")
-@Slf4j
-public class ArticleController {
-	private  final Logger logger = LoggerFactory.getLogger(ArticleController.class);
+
+public class CourseController {
+	private  final Logger logger = LoggerFactory.getLogger(CourseController.class);
 	@Autowired
-	private ArticleService articleService;
+	private CourseService articleService;
+
 
 
 	@RequiresPermissions("article:list")
-	@GetMapping("/listArticle")
+	@GetMapping("/courses")
 	public JSONObject listArticle(HttpServletRequest request) {
 		return articleService.listArticle(CommonUtil.request2Json(request));
 	}
 
-	@RequiresPermissions("article:add")
-	@PostMapping("/addArticle")
+	@RequiresPermissions("course:add")
+	@PostMapping("/course")
 	public JSONObject addArticle(@RequestBody JSONObject requestJson) {
 		CommonUtil.hasAllRequired(requestJson, "content");
 
 		return articleService.addArticle(requestJson);
 	}
 
-	@RequiresPermissions("article:update")
-	@PostMapping("/updateArticle")
+
+	@RequiresPermissions("course:update")
+	@PutMapping("/course")
 	public JSONObject updateArticle(@RequestBody JSONObject requestJson) {
 		CommonUtil.hasAllRequired(requestJson, "id,content");
 		return articleService.updateArticle(requestJson);

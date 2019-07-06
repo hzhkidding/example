@@ -3,7 +3,7 @@ package com.heeexy.example.service;
 import com.alibaba.fastjson.JSONObject;
 
 
-public interface ArticleService {
+public interface CourseService {
 	/**
 	 * 新增文章
 	 */
